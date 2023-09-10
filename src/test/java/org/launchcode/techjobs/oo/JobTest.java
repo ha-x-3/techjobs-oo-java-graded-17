@@ -46,4 +46,60 @@ public class JobTest {
                 new CoreCompetency("Persistence"));
         assertFalse(job1.equals(job2));
     }
+
+    @Test
+    public void testToStringStartsAndEndsWithNewLine() {
+        Job job = new Job("Product tester",
+                new Employer("ACME"),
+                new Location("Desert"),
+                new PositionType("Quality control"),
+                new CoreCompetency("Persistence"));
+
+        assertEquals(System.lineSeparator() +
+                        "ID: " + job.getId() +
+                        "\nName: " + job.getName() +
+                        "\nEmployer: " + job.getEmployer() +
+                        "\nLocation: " + job.getLocation() +
+                        "\nPosition Type: " + job.getPositionType() +
+                        "\nCore Competency: " + job.getCoreCompetency() +
+                        System.lineSeparator(),
+                                        job.toString());
+    }
+
+    @Test
+    public void testToStringContainsCorrectLabelsAndData() {
+        Job job = new Job("Product tester",
+                new Employer("ACME"),
+                new Location("Desert"),
+                new PositionType("Quality control"),
+                new CoreCompetency("Persistence"));
+        assertEquals(System.lineSeparator() +
+                "ID: " + job.getId() +
+                "\nName: " + job.getName() +
+                "\nEmployer: " + job.getEmployer() +
+                "\nLocation: " + job.getLocation() +
+                "\nPosition Type: " + job.getPositionType() +
+                "\nCore Competency: " + job.getCoreCompetency() +
+                System.lineSeparator(),
+                                job.toString());
+    }
+
+    @Test
+    public void testToStringHandlesEmptyField() {
+        Job job1 = new Job();
+        assertEquals("OOPS! This job does not seem to exist.", job1.toString());
+        Job job2 = new Job("Product tester",
+                new Employer(""),
+                new Location(""),
+                new PositionType(""),
+                new CoreCompetency(""));
+        assertEquals(System.lineSeparator() +
+                "ID: " + job2.getId() +
+                "\nName: " + job2.getName() +
+                "\nEmployer: " + "Data not available" +
+                "\nLocation: " + "Data not available" +
+                "\nPosition Type: " + "Data not available" +
+                "\nCore Competency: " + "Data not available" +
+                System.lineSeparator(), job2.toString());
+    }
 }

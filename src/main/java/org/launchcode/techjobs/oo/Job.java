@@ -30,9 +30,38 @@ public class Job {
         this.coreCompetency = coreCompetency;
     }
 
+    @Override
+    public String toString() {
+        if (name == null && employer == null && location == null && positionType == null && coreCompetency == null) {
+            return "OOPS! This job does not seem to exist.";
+        }
+        if (Objects.equals(this.getName(), "") || this.getName() == null) {
+            this.setName("Data not available");
+        }
+        if (this.getEmployer().toString().equals("") || this.getEmployer() == null) {
+            this.employer.setValue("Data not available");
+        }
+        if (this.getLocation().toString().equals("") || this.getLocation() == null) {
+            this.location.setValue("Data not available");
+        }
+        if (this.getPositionType().toString().equals("") || this.getPositionType() == null) {
+            this.positionType.setValue("Data not available");
+        }
+        if (this.getCoreCompetency().toString().equals("") || this.getCoreCompetency() == null) {
+            this.coreCompetency.setValue("Data not available");
+        }
+        return System.lineSeparator() +
+                "ID: " + id +
+                "\nName: " + name +
+                "\nEmployer: " + employer +
+                "\nLocation: " + location +
+                "\nPosition Type: " + positionType +
+                "\nCore Competency: " + coreCompetency +
+                System.lineSeparator();
+    }
+
     // TODO: Add custom equals and hashCode methods. Consider two Job objects "equal" when their id fields
     //  match.
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -45,7 +74,6 @@ public class Job {
     public int hashCode() {
         return Objects.hash(id);
     }
-
 
     // TODO: Add getters for each field EXCEPT nextId. Add setters for each field EXCEPT nextID
     //  and id.
